@@ -14,6 +14,7 @@ const PostForm = () => {
   const dispatch = useDispatch();
 
   const person = useSelector((store) => store.person);
+
   const submitHandler = () => {
     const preparedPostQuery = {
       title,

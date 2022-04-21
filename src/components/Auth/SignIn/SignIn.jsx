@@ -25,24 +25,15 @@ export default function SignIn() {
     event.preventDefault();
     const data = new FormData(event.currentTarget);
     dispatch(
-      signInQuery(
-        {
-          email: data.get("email"),
-          password: data.get("password"),
-          cb: () => {
-            navigate(from, { replace: true });
-          },
+      signInQuery({
+        email: data.get("email"),
+        password: data.get("password"),
+        cb: () => {
+          navigate(from, { replace: true });
         },
-        person.token
-      )
+      })
     );
   };
-
-  const token = useSelector((store) => store.person.token);
-  const dataFromLS = localStorage.getItem(TOKEN);
-  if (!dataFromLS) {
-    localStorage.setItem(TOKEN, token);
-  }
 
   return (
     <Container

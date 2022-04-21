@@ -1,4 +1,4 @@
-import { ADD_NEW_POST, DELETE_POST, SET_ALL_POSTS } from '../types/postsTypes'
+import { ADD_NEW_POST, DELETE_POST, SET_ALL_POSTS, UPDATE_POST } from '../types/postsTypes'
 
 export const setAllPosts = (allPosts) => ({
 	type: SET_ALL_POSTS,
@@ -61,4 +61,26 @@ export const deletePostQuery = (_id, token) => async (dispatch) =>{
 	if(response.status === 200) {		
 		dispatch(deletePost(_id))
 	}
+}
+
+export const updatePost = (updatePost) => ({
+	type: UPDATE_POST,
+	payload: updatePost,
+}) 
+
+export const updateNewPost = (post, token) => async (dispatch) => {
+
+	const response = await fetch('https://api.react-learning.ru/posts', {
+		method: "PATCH",
+		headers: {
+			authorization: `Bearer ${token}`,
+			'Content-Type': 'application/json' 
+		},
+	
+	})
+
+	const postFromApi = await response.json()
+
+	dispatch(updatePost(postFromApi))
+
 }

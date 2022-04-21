@@ -8,12 +8,12 @@ export const signIn = (person) => ({
 });
 
 export const signInQuery =
-    ({ email, password, cb }, token) =>
+    ({ email, password, cb }) =>
         async (dispatch) => {
             const response = await axiosInstance.post("signin", {
                 email,
                 password,
-            }, token);
+            }, );
 
             const person = response.data;
 

@@ -8,9 +8,15 @@ import { composeWithDevTools } from '@redux-devtools/extension';
 import initState from './redux/initState'
 import thunk from 'redux-thunk'
 import { Provider } from 'react-redux';
+import { TOKEN } from './constants';
 
 
 const store = createStore(rootReducer, initState(), composeWithDevTools(applyMiddleware(thunk)))
+store.subscribe(() => {
+ 
+  window.localStorage.setItem(TOKEN, store.getState().person.token)
+  })
+  
 
 ReactDOM.render(
   <React.StrictMode>

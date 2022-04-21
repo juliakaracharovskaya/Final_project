@@ -8,6 +8,8 @@ import { useNavigate, useParams } from "react-router-dom";
 import { useEffect, useState, useRef } from "react";
 import { useSelector } from "react-redux";
 import Comments from "../Comments/Comments";
+import BasicModal from "../Modal/Modal";
+import ModalForm from "../Modal/ModalForm";
 
 const PostsDetail = () => {
   const { _id } = useParams();
@@ -57,10 +59,13 @@ const PostsDetail = () => {
           </Typography>
         </CardContent>
         <CardActions>
-          <Button size="small" onClick={() => navigate(-1)}>
+          <Button size="medium" onClick={() => navigate(-1)}>
             COME BACK
           </Button>
-          <Button size="small">CREATE</Button>
+
+          <BasicModal>
+            <ModalForm {...post} />
+          </BasicModal>
         </CardActions>
         <CardContent>
           <Comments />

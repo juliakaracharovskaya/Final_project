@@ -7,23 +7,27 @@ import Typography from "@mui/material/Typography";
 const Comments = () => {
   const person = useSelector((store) => store.person);
   const { _id } = useParams();
-  const [comment, setComment] = useState({});
+  const [comments, setComments] = useState([]);
 
   useEffect(() => {
     fetch(`https://api.react-learning.ru/posts/comments/${_id}`, {
+      metod: "GET",
       headers: {
         authorization: `Bearer ${person.token}`,
       },
     })
       .then((response) => response.json())
-      .then((dataFromServer) => setComment(dataFromServer));
+      .then((dataFromServer) => setComments(dataFromServer));
   }, [_id, person.token]);
-  // console.log(comment);
+
   return (
     <CardContent>
       <Typography paragraph>
-        {comment.author}
-        {comment.text}
+        {comments.map((comment, index) => (
+          <Typography paragraph key={index}>
+            {comment.author.name}: {comment.text}
+          </Typography>
+        ))}
       </Typography>
     </CardContent>
   );

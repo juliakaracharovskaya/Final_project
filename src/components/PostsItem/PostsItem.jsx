@@ -18,6 +18,10 @@ import DeleteIcon from "@mui/icons-material/Delete";
 import Stack from "@mui/material/Stack";
 import { useDispatch, useSelector } from "react-redux";
 import { deletePostQuery } from "../../redux/actions/postsAC";
+import {
+  setLikeQuery,
+  deleteLikeQuery,
+} from "../../redux/actions/likesPostsAC";
 import { Link } from "react-router-dom";
 import LinkMUI from "@mui/material/Link";
 
@@ -32,7 +36,15 @@ const ExpandMore = styled((props) => {
   }),
 }));
 
-export default function PostsItem({ image, author, title, text, _id, tags }) {
+export default function PostsItem({
+  image,
+  author,
+  title,
+  text,
+  _id,
+  tags,
+  likes,
+}) {
   const [expanded, setExpanded] = React.useState(false);
 
   const handleExpandClick = () => {
@@ -53,9 +65,18 @@ export default function PostsItem({ image, author, title, text, _id, tags }) {
       dispatch(deletePostQuery(_id, person.token));
     }
   };
+
+  const likeHandler = () => {
+    if (!likes.includes(person._id)) {
+      dispatch(setLikeQuery(_id, person.token));
+    } else {
+      dispatch(deleteLikeQuery(_id, person.token));
+    }
+  };
+
   return (
-    <Grid item container direction="column" xs={4} sx={{ minHeight: "500" }}>
-      <Card>
+    <Grid item container direction="column" xs={4}>
+      <Card sx={{ height: "500" }}>
         <CardHeader
           avatar={
             <Avatar sx={{ bgcolor: red[500] }} aria-label="recipe">
@@ -89,8 +110,9 @@ export default function PostsItem({ image, author, title, text, _id, tags }) {
         </Stack>
 
         <CardActions disableSpacing>
-          <IconButton aria-label="add to favorites">
+          <IconButton aria-label="add to favorites" onClick={likeHandler}>
             <FavoriteIcon />
+            {likes.length}
           </IconButton>
 
           <ExpandMore
