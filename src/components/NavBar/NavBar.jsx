@@ -9,11 +9,12 @@ import MenuIcon from "@mui/icons-material/Menu";
 import Container from "@mui/material/Container";
 import Avatar from "@mui/material/Avatar";
 import Button from "@mui/material/Button";
-import Tooltip from "@mui/material/Tooltip";
 import MenuItem from "@mui/material/MenuItem";
 import { Link } from "react-router-dom";
 import LinkMUI from "@mui/material/Link";
 import SearchAppBar from "../SearchAppBar/SearchAppBar";
+import { useSelector } from "react-redux";
+import { v4 as uuidv4 } from "uuid";
 
 const pages = [
   {
@@ -33,32 +34,24 @@ const pages = [
     path: "/signUp",
   },
 ];
-const settings = ["Profile", "Account", "Dashboard", "Logout"];
 
 const NavBar = () => {
   const [anchorElNav, setAnchorElNav] = React.useState(null);
-  const [anchorElUser, setAnchorElUser] = React.useState(null);
 
   const handleOpenNavMenu = (event) => {
     setAnchorElNav(event.currentTarget);
-  };
-  const handleOpenUserMenu = (event) => {
-    setAnchorElUser(event.currentTarget);
   };
 
   const handleCloseNavMenu = () => {
     setAnchorElNav(null);
   };
-
-  const handleCloseUserMenu = () => {
-    setAnchorElUser(null);
-  };
-
+  const person = useSelector((store) => store.person);
   return (
     <AppBar position="static">
       <Container maxWidth="xl">
         <Toolbar disableGutters>
           <Typography
+            key={uuidv4()}
             variant="h6"
             noWrap
             component="div"
@@ -97,8 +90,8 @@ const NavBar = () => {
               }}
             >
               {pages.map((page) => (
-                <LinkMUI component={Link} to={page.path}>
-                  <MenuItem key={page.title} onClick={handleCloseNavMenu}>
+                <LinkMUI component={Link} to={page.path} key={uuidv4()}>
+                  <MenuItem onClick={handleCloseNavMenu}>
                     <Typography textAlign="center">{page.title}</Typography>
                   </MenuItem>
                 </LinkMUI>
@@ -116,9 +109,8 @@ const NavBar = () => {
 
           <Box sx={{ flexGrow: 1, display: { xs: "none", md: "flex" } }}>
             {pages.map((page) => (
-              <LinkMUI component={Link} to={page.path}>
+              <LinkMUI component={Link} to={page.path} key={uuidv4()}>
                 <Button
-                  key={page.title}
                   onClick={handleCloseNavMenu}
                   sx={{ my: 2, color: "white", display: "block" }}
                 >
@@ -130,35 +122,8 @@ const NavBar = () => {
 
           <SearchAppBar />
 
-          <Box sx={{ flexGrow: 0 }}>
-            <Tooltip title="Open settings">
-              <IconButton onClick={handleOpenUserMenu} sx={{ p: 0 }}>
-                <Avatar alt="Remy Sharp" src="/static/images/avatar/2.jpg" />
-              </IconButton>
-            </Tooltip>
-
-            <Menu
-              sx={{ mt: "45px" }}
-              id="menu-appbar"
-              anchorEl={anchorElUser}
-              anchorOrigin={{
-                vertical: "top",
-                horizontal: "right",
-              }}
-              keepMounted
-              transformOrigin={{
-                vertical: "top",
-                horizontal: "right",
-              }}
-              open={Boolean(anchorElUser)}
-              onClose={handleCloseUserMenu}
-            >
-              {settings.map((setting) => (
-                <MenuItem key={setting} onClick={handleCloseUserMenu}>
-                  <Typography textAlign="center">{setting}</Typography>
-                </MenuItem>
-              ))}
-            </Menu>
+          <Box>
+            <Avatar alt="avatar" src={person?.avatar} />
           </Box>
         </Toolbar>
       </Container>

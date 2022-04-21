@@ -10,7 +10,6 @@ import { Paper } from "@mui/material";
 import { useDispatch, useSelector } from "react-redux";
 import { signInQuery } from "../../../redux/actions/personAC";
 import { useLocation, useNavigate } from "react-router-dom";
-import { TOKEN } from "../../../constants";
 
 export default function SignIn() {
   const navigate = useNavigate();
