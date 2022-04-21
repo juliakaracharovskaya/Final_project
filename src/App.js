@@ -14,10 +14,10 @@ import { RequireAuth } from "./components/Auth/RequireAuth/RequireAuth";
 import SignIn from "./components/Auth/SignIn/SignIn";
 import PostsDetail from './components/PostsDetail/PostsDetail';
 import PageNotFound from './components/404/404';
-import { useDispatch } from 'react-redux';
-import { useEffect } from 'react';
-import { TOKEN } from './constants';
-import { getPersonQuery } from './redux/actions/personAC';
+// import { useDispatch } from 'react-redux';
+// import { useEffect } from 'react';
+// import { TOKEN } from './constants';
+// import { getPersonQuery } from './redux/actions/personAC';
 import SignUp from './components/Auth/SignUp/SignUp';
 
 
@@ -32,14 +32,14 @@ const themeLight = createTheme({
 
 function App() {
  
-  const personFromLS = localStorage.getItem(TOKEN)
+  // const personFromLS = localStorage.getItem(TOKEN)
  
-  const dispatch = useDispatch()
-  useEffect(()=> {
-    if (personFromLS) {
-       dispatch(getPersonQuery(personFromLS))
-    }
-  }, [dispatch, personFromLS] ) 
+  // const dispatch = useDispatch()
+  // useEffect(()=> {
+  //   if (personFromLS) {
+  //      dispatch(getPersonQuery(personFromLS))
+  //   }
+  // }, [dispatch, personFromLS] ) 
  
   return (
     <ThemeProvider theme={themeLight}>

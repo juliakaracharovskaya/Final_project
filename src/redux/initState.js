@@ -2,7 +2,7 @@ import {TOKEN} from '../constants'
 
 const initState = () => {
 
-const token = window.localStorage.getItem(TOKEN) || '';
+const token = localStorage.getItem(TOKEN) || '';
 
 	return {
 		posts: [],

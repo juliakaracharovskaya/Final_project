@@ -14,7 +14,7 @@ import { TOKEN } from './constants';
 const store = createStore(rootReducer, initState(), composeWithDevTools(applyMiddleware(thunk)))
 store.subscribe(() => {
  
-  window.localStorage.setItem(TOKEN, store.getState().person.token)
+  localStorage.setItem(TOKEN, store.getState().person.token)
   })
   
 

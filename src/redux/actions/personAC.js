@@ -38,7 +38,7 @@ export const getPerson = (token, person) => ({
 
 export const getPersonQuery = (token) => async (dispatch) => {
     const response = await axios.get(
-        'https://api.react-learning.ru/users/me',{
+        'users/me',{
         headers: {
 			authorization: `Bearer ${token}` 
 		}})
