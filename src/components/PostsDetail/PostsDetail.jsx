@@ -5,34 +5,26 @@ import CardMedia from "@mui/material/CardMedia";
 import Button from "@mui/material/Button";
 import Typography from "@mui/material/Typography";
 import { useNavigate, useParams } from "react-router-dom";
-import { useEffect, useState, useRef } from "react";
-import { useSelector } from "react-redux";
+import { useEffect, useRef } from "react";
+import { useDispatch, useSelector } from "react-redux";
 import Comments from "../Comments/Comments";
 import BasicModal from "../Modal/Modal";
 import ModalForm from "../Modal/ModalForm";
+import { getPostQuery } from "../../redux/actions/postAC";
 
 const PostsDetail = () => {
   const { _id } = useParams();
-  const [post, setPost] = useState({});
+
   const navigate = useNavigate();
   const controller = useRef(new AbortController());
+  const controllerForApi = controller.current.signal;
   const person = useSelector((store) => store.person);
+  const dispatch = useDispatch();
+  const post = useSelector((store) => store.post);
 
   useEffect(() => {
-    fetch(`https://api.react-learning.ru/posts/${_id}`, {
-      signal: controller.current.signal,
-      headers: {
-        authorization: `Bearer ${person.token}`,
-      },
-    })
-      .then((response) => response.json())
-      .then((dataFromServer) => setPost(dataFromServer));
-
-    return () => {
-      // eslint-disable-next-line react-hooks/exhaustive-deps
-      controller.current.abort();
-    };
-  }, [_id, person.token]);
+    dispatch(getPostQuery(person.token, _id));
+  }, [_id, dispatch, person.token, controllerForApi]);
 
   const content = () => {
     if (!post._id) {

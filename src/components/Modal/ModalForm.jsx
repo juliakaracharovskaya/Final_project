@@ -4,7 +4,7 @@ import Button from "@mui/material/Button";
 import { Paper, Stack } from "@mui/material";
 // import { useParams } from "react-router-dom";
 import Typography from "@mui/material/Typography";
-import { updatePostQuery } from "../../redux/actions/postsAC";
+import { updatePostQuery } from "../../redux/actions/postAC";
 import { useDispatch, useSelector } from "react-redux";
 
 function ModalForm({ title, image, text, _id }) {
@@ -18,9 +18,9 @@ function ModalForm({ title, image, text, _id }) {
 
   const createSubmit = () => {
     const preparedPostQuery = {
-      newTitle,
-      newImage,
-      newText,
+      title: newTitle,
+      image: newImage,
+      text: newText,
     };
     // console.log({ preparedPostQuery });
     const body = JSON.stringify(preparedPostQuery);
