@@ -67,9 +67,8 @@ const PostsDetail = () => {
             <ModalForm {...post} />
           </BasicModal>
         </CardActions>
-        <CardContent>
-          <Comments />
-        </CardContent>
+
+        <Comments />
       </Card>
     );
   };

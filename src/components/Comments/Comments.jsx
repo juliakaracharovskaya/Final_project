@@ -2,7 +2,7 @@ import { useEffect, useState } from "react";
 import { useSelector } from "react-redux";
 import { useParams } from "react-router-dom";
 import Typography from "@mui/material/Typography";
-
+import CardContent from "@mui/material/CardContent";
 const Comments = () => {
   const person = useSelector((store) => store.person);
   const { _id } = useParams();
@@ -20,13 +20,13 @@ const Comments = () => {
   }, [_id, person.token]);
 
   return (
-    <Typography paragraph>
+    <CardContent>
       {comments.map((comment, index) => (
         <Typography paragraph key={index}>
           {comment.author.name}: {comment.text}
         </Typography>
       ))}
-    </Typography>
+    </CardContent>
   );
 };
 export default Comments;
