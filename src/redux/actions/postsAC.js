@@ -68,19 +68,21 @@ export const updatePost = (updatePost) => ({
 	payload: updatePost,
 }) 
 
-export const updateNewPost = (post, token) => async (dispatch) => {
+export const updatePostQuery = ( updatedPost, token, _id) => async (dispatch) => {
 
-	const response = await fetch('https://api.react-learning.ru/posts', {
+	const response = await fetch(`https://api.react-learning.ru/posts/${_id}`, {
 		method: "PATCH",
 		headers: {
 			authorization: `Bearer ${token}`,
 			'Content-Type': 'application/json' 
 		},
-	
+	   body: updatedPost
 	})
-
+	if (response.status === 200) {
 	const postFromApi = await response.json()
-
 	dispatch(updatePost(postFromApi))
+	
+	}
+	else {alert("Нельзя редактировать чужой пост")}
 
 }

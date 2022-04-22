@@ -36,7 +36,7 @@ const PostsDetail = () => {
 
   const content = () => {
     if (!post._id) {
-      return <strong>Loading...</strong>;
+      return <Typography>Loading...</Typography>;
     }
 
     return (

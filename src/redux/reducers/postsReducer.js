@@ -22,9 +22,8 @@ const postsReducer = (state = [], action) => {
 			})
 		case UPDATE_POST:
 			return state.map((post)=> {
-				if(post._id === action.payload._id) {
-					return action.ayload
-				}
+				if(post._id === action.payload._id) 
+					return action.payload
 				return post
 			})
 	

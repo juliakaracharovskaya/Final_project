@@ -1,7 +1,6 @@
 import { useEffect, useState } from "react";
 import { useSelector } from "react-redux";
 import { useParams } from "react-router-dom";
-import CardContent from "@mui/material/CardContent";
 import Typography from "@mui/material/Typography";
 
 const Comments = () => {
@@ -21,15 +20,13 @@ const Comments = () => {
   }, [_id, person.token]);
 
   return (
-    <CardContent>
-      <Typography paragraph>
-        {comments.map((comment, index) => (
-          <Typography paragraph key={index}>
-            {comment.author.name}: {comment.text}
-          </Typography>
-        ))}
-      </Typography>
-    </CardContent>
+    <Typography paragraph>
+      {comments.map((comment, index) => (
+        <Typography paragraph key={index}>
+          {comment.author.name}: {comment.text}
+        </Typography>
+      ))}
+    </Typography>
   );
 };
 export default Comments;

@@ -3,34 +3,38 @@ import TextField from "@mui/material/TextField";
 import Button from "@mui/material/Button";
 import { Paper, Stack } from "@mui/material";
 // import { useParams } from "react-router-dom";
+import Typography from "@mui/material/Typography";
+import { updatePostQuery } from "../../redux/actions/postsAC";
+import { useDispatch, useSelector } from "react-redux";
 
-function ModalForm({ title, image, text, tags }) {
+function ModalForm({ title, image, text, _id }) {
   const [newTitle, setNewTitle] = useState(title);
   const [newImage, setNewImage] = useState(image);
   const [newText, setNewText] = useState(text);
-  const [newTags, setNewTags] = useState(tags);
 
-  const createSubmit = (e) => {
-    const newTextTrim = newText.trim();
-    const newTitleTrim = newTitle.trim();
-    const newImageTrim = newImage.trim();
-    const newTagsTrim = newTags.trim();
-    if (newTextTrim && newTitleTrim && newImageTrim && newTagsTrim) {
-      setNewTitle(newTitle);
-      setNewImage(newImage);
-      setNewText(newText);
-      setNewTags(newTags);
-    }
+  const dispatch = useDispatch();
+
+  const person = useSelector((store) => store.person);
+
+  const createSubmit = () => {
+    const preparedPostQuery = {
+      newTitle,
+      newImage,
+      newText,
+    };
+    // console.log({ preparedPostQuery });
+    const body = JSON.stringify(preparedPostQuery);
+
+    dispatch(updatePostQuery(body, person.token, _id));
+
+    setNewTitle(newTitle);
+    setNewImage(newImage);
+    setNewText(newText);
   };
 
   return (
-    <Stack
-      onSubmit={createSubmit}
-      component="div"
-      direction="column"
-      alignItems="center"
-    >
-      <Paper elevation={3} sx={{ width: 400 }}>
+    <Stack component="div" direction="column" alignItems="center">
+      <Paper elevation={3} sx={{ width: 392 }}>
         <Stack
           component="form"
           alignItems="center"
@@ -39,7 +43,7 @@ function ModalForm({ title, image, text, tags }) {
           sx={{ py: 5, px: 2 }}
           autoComplete="off"
         >
-          <div>
+          <Typography component={"div"}>
             <TextField
               id="outlined-basic"
               label="Title"
@@ -47,8 +51,8 @@ function ModalForm({ title, image, text, tags }) {
               value={newTitle}
               onChange={(e) => setNewTitle(e.target.value)}
             />
-          </div>
-          <div>
+          </Typography>
+          <Typography component={"div"}>
             <TextField
               id="filled-basic"
               label="Text"
@@ -56,8 +60,8 @@ function ModalForm({ title, image, text, tags }) {
               value={newText}
               onChange={(e) => setNewText(e.target.value)}
             />
-          </div>
-          <div>
+          </Typography>
+          <Typography component={"div"}>
             <TextField
               id="standard-basic"
               label="Image"
@@ -65,18 +69,11 @@ function ModalForm({ title, image, text, tags }) {
               value={newImage}
               onChange={(e) => setNewImage(e.target.value)}
             />
-          </div>
-          <div>
-            <TextField
-              id="standard-basic"
-              label="Tags"
-              variant="outlined"
-              value={newTags}
-              onChange={(e) => setNewTags(e.target.value)}
-            />
-          </div>
+          </Typography>
 
-          <Button variant="outlined">Save Post</Button>
+          <Button onClick={createSubmit} variant="outlined">
+            Save Post
+          </Button>
         </Stack>
       </Paper>
     </Stack>
