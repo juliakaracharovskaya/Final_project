@@ -4,6 +4,7 @@ import Button from "@mui/material/Button";
 import { useDispatch, useSelector } from "react-redux";
 import { queryNewPost } from "../../redux/actions/postsAC";
 import { Paper, Stack } from "@mui/material";
+import { useNavigate } from "react-router-dom";
 
 const PostForm = () => {
   const [title, setTitle] = useState("");
@@ -13,6 +14,7 @@ const PostForm = () => {
 
   const dispatch = useDispatch();
 
+  const navigate = useNavigate();
   const person = useSelector((store) => store.person);
 
   const submitHandler = () => {
@@ -83,7 +85,9 @@ const PostForm = () => {
               onChange={(e) => setTags(e.target.value)}
             />
           </div>
-
+          <Button onClick={() => navigate(-1)} variant="outlined">
+            Come back
+          </Button>
           <Button onClick={submitHandler} variant="outlined">
             Create Post
           </Button>

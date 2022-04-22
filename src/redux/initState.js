@@ -11,8 +11,12 @@ const token = localStorage.getItem(TOKEN) || '';
 			name: '',
 			email: '',
 			token,
+			
+			
+			
 		},
 		post: {},
+	
 	}
 }
 

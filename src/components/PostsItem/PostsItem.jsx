@@ -41,9 +41,9 @@ export default function PostsItem({
   author,
   title,
   text,
-  _id,
   tags,
   likes,
+  _id,
 }) {
   const [expanded, setExpanded] = React.useState(false);
 
@@ -51,10 +51,9 @@ export default function PostsItem({
     setExpanded(!expanded);
   };
 
-  const description = text.length > 50 ? text.slice(0, 50) + "..." : text;
+  const description = text.length > 25 ? text.slice(0, 25) + "..." : text;
 
   const dispatch = useDispatch();
-
   // eslint-disable-next-line no-unused-vars
   const person = useSelector((store) => store.person);
 
@@ -76,7 +75,7 @@ export default function PostsItem({
 
   return (
     <Grid item container direction="column" xs={4}>
-      <Card sx={{ height: "500" }}>
+      <Card>
         <CardHeader
           avatar={
             <Avatar sx={{ bgcolor: red[500] }} aria-label="recipe">

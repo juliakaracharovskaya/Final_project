@@ -19,8 +19,8 @@ const PostsDetail = () => {
   const controller = useRef(new AbortController());
   const controllerForApi = controller.current.signal;
   const person = useSelector((store) => store.person);
-  const dispatch = useDispatch();
   const post = useSelector((store) => store.post);
+  const dispatch = useDispatch();
 
   useEffect(() => {
     dispatch(getPostQuery(person.token, _id));

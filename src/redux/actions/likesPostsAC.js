@@ -36,6 +36,6 @@ export const deleteLikeQuery = (_id, token) => async (dispatch) => {
 	})
 
 	const postFromApi = await response.json()
-
 	dispatch(deleteLike(postFromApi))
 }
+

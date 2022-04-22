@@ -12,6 +12,7 @@ const rootReducer = combineReducers({
 	search: searchReducer,
 	person: personReducer,
 	post: postReducer,
+
     })
 
 

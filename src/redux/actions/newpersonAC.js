@@ -1,7 +1,6 @@
 import { axiosInstance } from "../../config/axios";
 import { signInQuery } from "./personAC";
 
-//регистарция 
 export const signUpQuery =
     ({ email, password, successCb, errorCb }) =>
 

@@ -21,7 +21,8 @@ export const signInQuery =
                 signIn({
                     ...person.data,
                     token: person.token,
-                })
+             
+                })            
             );
 
             typeof cb === 'function' && cb();
